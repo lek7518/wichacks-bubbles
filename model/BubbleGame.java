@@ -19,6 +19,9 @@ public class BubbleGame {
         setUpOpenLocations();
     }
 
+    /**
+     * Sets up all locations and places them in openLocations
+     */
     private void setUpOpenLocations(){
         for (int r = 0; r < rows; r++) {
             for (int c = 0; c < cols; c++) {
@@ -26,5 +29,9 @@ public class BubbleGame {
                 openLocations.add(gridLocation);
             }
         }
+    }
+
+    private void spawnBubble(){
+        
     }
 }
