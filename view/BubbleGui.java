@@ -1,4 +1,3 @@
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -6,15 +5,12 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.text.TextAlignment;
-import javafx.stage.FileChooser;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
 
-import java.io.File;
-import java.util.ArrayList;
+import java.io.FileInputStream;
+import java.io.InputStream;
 
 public class BubbleGui extends Application{
     private String status;
@@ -47,7 +43,7 @@ public class BubbleGui extends Application{
         //arrow buttons
         GridPane arrows = new GridPane();
         borderPane.setRight(arrows);
-        InputStream stream = new FileInputStream("arrow button"); //add image path
+        InputStream stream = new FileInputStream("images/bub_arrow.png");
         Image arrow = new Image(stream);
 
         Button left = new Button();
