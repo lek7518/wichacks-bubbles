@@ -15,5 +15,16 @@ public class BubbleGame {
     public BubbleGame(){
         this.openLocations = new HashSet<>();
         this.bubbles = new Bubble[rows*cols];
+
+        setUpOpenLocations();
+    }
+
+    private void setUpOpenLocations(){
+        for (int r = 0; r < rows; r++) {
+            for (int c = 0; c < cols; c++) {
+                Location gridLocation = new Location(r, c);
+                openLocations.add(gridLocation);
+            }
+        }
     }
 }
