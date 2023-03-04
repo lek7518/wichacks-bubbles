@@ -43,31 +43,42 @@ public class BubbleGame {
      * Moves the bubbles on the board
      * @param direction "up", "down", "left" or "right"
      */
-     private void merge(String direction){
+     private void makeMove(String direction){
         for (int row = 0; row < rows; row++) {  //go thhrough each spot on grid
             for (int col = 0; col < cols; col++) {
                 int neighborCol = 0;
                 int neighborRow = 0;
+                int moveRow = 0;
+                int moveCol = 0;
 
                 if (direction == "right"){
                     row = (rows - 1) - row;     //right to left
                     neighborCol = col - 1;
                     neighborRow = row;
+                    moveRow = row;
+                    moveCol = col + 1;
                 }
                 else if (direction == "left"){
                     neighborCol = col + 1;
                     neighborRow = row;
+                    moveRow = row;
+                    moveCol = col - 1;
                 }
                 else if (direction == "down"){
                     col = (cols - 1) - col;     //bottom to top
                     neighborCol = col;
                     neighborRow = row - 1;
+                    moveRow = row + 1;
+                    moveCol = col;
                 }
                 else {
                     neighborCol = col;
                     neighborRow = row + 1;
+                    moveRow = row - 1;
+                    moveCol = col;
                 }
 
+                //merging
                 if(neighborRow >= 0 && neighborCol >= 0 && neighborRow < rows 
                         && neighborCol < cols){
                     if (grid[neighborRow][neighborCol] != null){
@@ -75,6 +86,13 @@ public class BubbleGame {
                             grid[row][col].merge();
                             grid[neighborRow][neighborCol] = null;
                         }
+                    }
+                }
+                //moving
+                if (moveRow >= 0 && moveCol >= 0 && moveRow < rows && moveCol < cols){
+                    if (grid[moveRow][moveCol] == null){
+                        grid[moveRow][moveCol] = grid[row][col];
+                        grid[row][col] = null;
                     }
                 }
             }
