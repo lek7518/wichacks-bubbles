@@ -39,14 +39,45 @@ public class BubbleGame {
         grid[row][col] = bubble;
     }
 
-    // /**
-    //  * Moves the bubbles on the board
-    //  * @param direction "up", "down", "left" or "right"
-    //  */
-    // private void move(String direction){
-    //     int positionModifier = -1;
-    //     if (direction == "up" || direction == "right"){
-    //         positionModifier = 1;
-    //     }
-    // }
+    /**
+     * Moves the bubbles on the board
+     * @param direction "up", "down", "left" or "right"
+     */
+     private void merge(String direction){
+        for (int row = 0; row < rows; row++) {  //go thhrough each spot on grid
+            for (int col = 0; col < cols; col++) {
+                int neighborCol = 0;
+                int neighborRow = 0;
+
+                if (direction == "right"){
+                    row = (rows - 1) - row;     //right to left
+                    neighborCol = col - 1;
+                    neighborRow = row;
+                }
+                else if (direction == "left"){
+                    neighborCol = col + 1;
+                    neighborRow = row;
+                }
+                else if (direction == "down"){
+                    col = (cols - 1) - col;     //bottom to top
+                    neighborCol = col;
+                    neighborRow = row - 1;
+                }
+                else {
+                    neighborCol = col;
+                    neighborRow = row + 1;
+                }
+
+                if(neighborRow >= 0 && neighborCol >= 0 && neighborRow < rows 
+                        && neighborCol < cols){
+                    if (grid[neighborRow][neighborCol] != null){
+                        if (grid[neighborRow][neighborCol].getTwosize() == grid[row][col].getTwosize()){
+                            grid[row][col].merge();
+                            grid[neighborRow][neighborCol] = null;
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
