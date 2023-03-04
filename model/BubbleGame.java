@@ -5,7 +5,9 @@ public class BubbleGame {
     private final static int rows = 4;  //number of rows
     private final static int cols = 4;  //number of columns
     private final Random rand;          //Random generator
-    
+
+    private BubbleObserver observer;
+
     private Bubble[][] grid;    //locations not occupied by a bubble
 
     /**
