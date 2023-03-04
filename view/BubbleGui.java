@@ -50,23 +50,27 @@ public class BubbleGui extends Application{
         ImageView leftView = new ImageView();
         leftView.setImage(arrow);
         leftView.setRotate(leftView.getRotate() + 90);
+        left.setGraphic(leftView);
         arrows.add(left, 1, 0);
 
         Button right = new Button();
         ImageView rightView = new ImageView();
         rightView.setImage(arrow);
         rightView.setRotate(rightView.getRotate() + 270);
+        right.setGraphic(rightView);
         arrows.add(right, 1, 2);
 
         Button top = new Button();
         ImageView topView = new ImageView();
         topView.setImage(arrow);
+        top.setGraphic(topView);
         arrows.add(top, 0, 1);
 
         Button bottom = new Button();
         ImageView bottomView = new ImageView();
         bottomView.setImage(arrow);
         bottomView.setRotate(bottomView.getRotate() + 180);
+        bottom.setGraphic(bottomView);
         arrows.add(bottom, 2, 1);
 
 
