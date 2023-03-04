@@ -14,4 +14,11 @@ public class Bubble {
     public int getTwosize() {
         return twosize;
     }
+
+    /**
+     * Multiplies twosize by 2 to simulate merging bubbles
+     */
+    public void merge(){
+        twosize *= 2;
+    }
 }
