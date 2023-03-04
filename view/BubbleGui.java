@@ -34,8 +34,8 @@ public class BubbleGui extends Application{
         borderPane.setTop(statusLabel);
 
         //background grid image
-        InputStream stream = new FileInputStream("D"); //add image path
-        Image grid = new Image(stream);
+        InputStream gridStream = new FileInputStream("D"); //add image path
+        Image grid = new Image(gridStream);
         ImageView gridView = new ImageView();
         gridView.setImage(grid);
         gridView.setX(0);
@@ -54,27 +54,27 @@ public class BubbleGui extends Application{
         ImageView leftView = new ImageView();
         leftView.setImage(arrow);
         leftView.setRotate(leftView.getRotate() + 90);
-        left.add(arrow, 1, 0);
+        arrows.add(left, 1, 0);
 
         Button right = new Button();
         ImageView rightView = new ImageView();
         rightView.setImage(arrow);
         rightView.setRotate(rightView.getRotate() + 270);
-        right.add(arrow, 1, 2);
+        arrows.add(right, 1, 2);
 
         Button top = new Button();
         ImageView topView = new ImageView();
         topView.setImage(arrow);
-        top.add(arrow, 0, 1);
+        arrows.add(top, 0, 1);
 
         Button bottom = new Button();
         ImageView bottomView = new ImageView();
         bottomView.setImage(arrow);
         bottomView.setRotate(bottomView.getRotate() + 180);
-        bottom.add(arrow, 2, 1);
+        arrows.add(bottom, 2, 1);
 
 
-        Scene scene = new Scene();
+        Scene scene = new Scene(borderPane);
         stage.setTitle("Bubble Game");
         stage.setScene(scene);
         stage.show();
