@@ -30,7 +30,7 @@ public class BubbleGui extends Application{
         borderPane.setTop(statusLabel);
 
         //background grid image
-        InputStream gridStream = new FileInputStream("D"); //add image path
+        InputStream gridStream = new FileInputStream("images/bub_grid.png"); //add image path
         Image grid = new Image(gridStream);
         ImageView gridView = new ImageView();
         gridView.setImage(grid);
