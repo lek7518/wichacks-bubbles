@@ -158,22 +158,8 @@ public class BubbleGame {
                     int currentTwosize = grid[r][c].getTwosize();
                     int targetTwosize = 0;
 
-                    if ((r - 1) >= 0 && (c - 1) >= 0){
-                        targetTwosize = grid[r - 1][c - 1].getTwosize();
-                        if (targetTwosize == currentTwosize){
-                            gameStatus = "playable";
-                            return;
-                        }
-                    }
-                    else if ((r - 1) >= 0){
+                    if ((r - 1) >= 0){
                         targetTwosize = grid[r - 1][c].getTwosize();
-                        if (targetTwosize == currentTwosize){
-                            gameStatus = "playable";
-                            return;
-                        }
-                    }
-                    else if ((r - 1) >= 0 && (c + 1) < cols){
-                        targetTwosize = grid[r - 1][c + 1].getTwosize();
                         if (targetTwosize == currentTwosize){
                             gameStatus = "playable";
                             return;
@@ -193,22 +179,8 @@ public class BubbleGame {
                             return;
                         }
                     }
-                    else if ((r + 1) < rows && (c - 1) >= 0){
-                        targetTwosize = grid[r + 1][c - 1].getTwosize();
-                        if (targetTwosize == currentTwosize){
-                            gameStatus = "playable";
-                            return;
-                        }
-                    }
                     else if ((r + 1) < rows){
                         targetTwosize = grid[r + 1][c].getTwosize();
-                        if (targetTwosize == currentTwosize){
-                            gameStatus = "playable";
-                            return;
-                        }
-                    }
-                    else if ((r + 1) < rows && (c + 1) < cols){
-                        targetTwosize = grid[r + 1][c + 1].getTwosize();
                         if (targetTwosize == currentTwosize){
                             gameStatus = "playable";
                             return;
@@ -218,7 +190,6 @@ public class BubbleGame {
             }
         }
         gameStatus = "loss";
-        return;
     }
 
     public void startGame(){
