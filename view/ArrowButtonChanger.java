@@ -18,5 +18,4 @@ public class ArrowButtonChanger implements EventHandler<ActionEvent>{
     public void handle(ActionEvent arg0) {
         game.makeMove(direction);
     }
-    
 }
