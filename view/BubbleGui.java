@@ -43,42 +43,44 @@ public class BubbleGui extends Application{
         //arrow buttons
         GridPane arrows = new GridPane();
         borderPane.setRight(arrows);
-        InputStream stream = new FileInputStream("images/bub_arrow.png");
-        Image arrow = new Image(stream);
 
         Button left = new Button();
+        InputStream leftStream = new FileInputStream("images/left_arrow.png");
+        Image leftArrow = new Image(leftStream);
         ImageView leftView = new ImageView();
-        leftView.setImage(arrow);
-        leftView.setFitWidth(200);
+        leftView.setImage(leftArrow);
+        leftView.setFitWidth(100);
         leftView.setPreserveRatio(true);
-        leftView.setRotate(leftView.getRotate() + 180);
         left.setGraphic(leftView);
         arrows.add(left, 1, 0);
 
         Button right = new Button();
+        InputStream rightStream = new FileInputStream("images/right_arrow.png");
+        Image rightArrow = new Image(rightStream);
         ImageView rightView = new ImageView();
-        rightView.setImage(arrow);
-        rightView.setFitWidth(200);
+        rightView.setImage(rightArrow);
+        rightView.setFitWidth(100);
         rightView.setPreserveRatio(true);
-        //rightView.setRotate(rightView.getRotate() + 180);
         right.setGraphic(rightView);
         arrows.add(right, 1, 2);
 
         Button top = new Button();
+        InputStream topStream = new FileInputStream("images/top_arrow.png");
+        Image topArrow = new Image(topStream);
         ImageView topView = new ImageView();
-        topView.setImage(arrow);
-        topView.setFitWidth(200);
+        topView.setImage(topArrow);
+        topView.setFitWidth(100);
         topView.setPreserveRatio(true);
-        leftView.setRotate(leftView.getRotate() + 90);
         top.setGraphic(topView);
         arrows.add(top, 0, 1);
 
         Button bottom = new Button();
+        InputStream bottomStream = new FileInputStream("images/bottom_arrow.png");
+        Image bottomArrow = new Image(bottomStream);
         ImageView bottomView = new ImageView();
-        bottomView.setImage(arrow);
-        bottomView.setFitWidth(200);
+        bottomView.setImage(bottomArrow);
+        bottomView.setFitWidth(100);
         bottomView.setPreserveRatio(true);
-        bottomView.setRotate(bottomView.getRotate() + 270);
         bottom.setGraphic(bottomView);
         arrows.add(bottom, 2, 1);
 
