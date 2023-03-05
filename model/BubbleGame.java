@@ -46,7 +46,7 @@ public class BubbleGame {
      * Moves the bubbles on the board
      * @param direction "up", "down", "left" or "right"
      */
-     private void makeMove(String direction){
+     public void makeMove(String direction){
         for (int row = 0; row < rows; row++) {  //go thhrough each spot on grid
             for (int col = 0; col < cols; col++) {
                 int neighborCol = 0;
