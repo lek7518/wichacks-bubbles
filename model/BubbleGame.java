@@ -1,7 +1,5 @@
 import java.util.Random;
 
-import javax.lang.model.util.ElementScanner14;
-
 /**
  * Game of merging bubbles
  * @author Carey McCollester
