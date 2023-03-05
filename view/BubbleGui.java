@@ -17,12 +17,13 @@ public class BubbleGui extends Application{
     private String status;
     private Label statusLabel = new Label(status);
     private ImageView[][] images;
+    private BubbleGame game;
 
     public void init(){
         status = "Hit the arrow keys to play!";
         statusLabel.setText(status);
 
-        //BubbleGame.addObserver(this);
+        game = new BubbleGame();
     }
 
     @Override
@@ -78,6 +79,7 @@ public class BubbleGui extends Application{
         leftView.setPreserveRatio(true);
         left.setGraphic(leftView);
         arrows.add(left, 0, 1);
+        left.setOnAction(new ArrowButtonChanger(game, "left"));
 
         Button right = new Button();
         InputStream rightStream = new FileInputStream("images/right_arrow.png");
@@ -88,6 +90,7 @@ public class BubbleGui extends Application{
         rightView.setPreserveRatio(true);
         right.setGraphic(rightView);
         arrows.add(right, 2, 1);
+        right.setOnAction(new ArrowButtonChanger(game, "right"));
 
         Button top = new Button();
         InputStream topStream = new FileInputStream("images/top_arrow.png");
@@ -98,6 +101,7 @@ public class BubbleGui extends Application{
         topView.setPreserveRatio(true);
         top.setGraphic(topView);
         arrows.add(top, 1, 0);
+        top.setOnAction(new ArrowButtonChanger(game, "up"));
 
         Button bottom = new Button();
         InputStream bottomStream = new FileInputStream("images/bottom_arrow.png");
@@ -108,7 +112,10 @@ public class BubbleGui extends Application{
         bottomView.setPreserveRatio(true);
         bottom.setGraphic(bottomView);
         arrows.add(bottom, 1, 2);
+        bottom.setOnAction(new ArrowButtonChanger(game, "down"));
 
+        game.registerObserver(this);
+        game.startGame();
 
         Scene scene = new Scene(borderPane);
         stage.setTitle("Bubble Game");

@@ -82,8 +82,8 @@ public class BubbleChanger implements BubbleObserver{
                     break;
             
                 default:    //null 0 no bubble
-                    imageStream = null;
-                    break;
+                    images[row][col].setImage(null);
+                    return;
             }
 
             Image bubbleImage = new Image(imageStream);

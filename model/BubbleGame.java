@@ -20,8 +20,6 @@ public class BubbleGame {
     public BubbleGame(){
         this.grid = new Bubble[rows][cols];
         this.rand = new Random();
-
-        spawnBubble();
     }
 
     private void spawnBubble(){
@@ -108,8 +106,14 @@ public class BubbleGame {
                         observer.bubbleUpdated(row, col, null);
                     }
                 }
+
+                spawnBubble();
             }
         }
+    }
+
+    public void startGame(){
+        spawnBubble();
     }
 
     public int getCols() {
