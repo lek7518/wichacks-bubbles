@@ -6,7 +6,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
-
+import javafx.scene.text.Font;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -18,14 +18,17 @@ import java.io.InputStream;
     * @author Lydia Klecan
  */
 public class BubbleGui extends Application{
+    private BubbleGame game;
+
     private String status;
     private Label statusLabel = new Label(status);
     private ImageView[][] images;
-    private BubbleGame game;
+   
 
     public void init(){
         status = "Hit the arrow keys to play!";
         statusLabel.setText(status);
+        statusLabel.setFont(new Font("Times", 30));
 
         game = new BubbleGame();
     }
@@ -36,7 +39,7 @@ public class BubbleGui extends Application{
         BorderPane borderPane = new BorderPane();
         borderPane.setTop(statusLabel);
 
-        images = new ImageView[4][4];
+        images = new ImageView[game.getRows()][game.getCols()];
         for (int i = 0; i < images.length; i++) {
             for (int index = 0; index < images.length; index++) {
                 images[i][index] = new ImageView();
@@ -52,15 +55,6 @@ public class BubbleGui extends Application{
         gridView.setY(0);
         gridView.setFitWidth(800);
         gridView.setPreserveRatio(true);
-        //borderPane.setCenter(gridView);
-
-        //testing position setting functions
-        InputStream testStream = new FileInputStream("images/bub_grey.png");
-        Image testBubble = new Image(testStream);
-        ImageView testView = new ImageView();
-        testView.setImage(testBubble);
-        testView.setX(-300);
-        testView.setY(300);
 
         Group bubbleGroup = new Group(gridView);
         for (int i = 0; i < images.length; i++) {
@@ -83,7 +77,7 @@ public class BubbleGui extends Application{
         leftView.setPreserveRatio(true);
         left.setGraphic(leftView);
         arrows.add(left, 0, 1);
-        left.setOnAction(new ArrowButtonChanger(game, "left"));
+        left.setOnAction(new ArrowButtonChanger(this, game, "left"));
 
         Button right = new Button();
         InputStream rightStream = new FileInputStream("images/right_arrow.png");
@@ -94,7 +88,7 @@ public class BubbleGui extends Application{
         rightView.setPreserveRatio(true);
         right.setGraphic(rightView);
         arrows.add(right, 2, 1);
-        right.setOnAction(new ArrowButtonChanger(game, "right"));
+        right.setOnAction(new ArrowButtonChanger(this, game, "right"));
 
         Button top = new Button();
         InputStream topStream = new FileInputStream("images/top_arrow.png");
@@ -105,7 +99,7 @@ public class BubbleGui extends Application{
         topView.setPreserveRatio(true);
         top.setGraphic(topView);
         arrows.add(top, 1, 0);
-        top.setOnAction(new ArrowButtonChanger(game, "up"));
+        top.setOnAction(new ArrowButtonChanger(this, game, "up"));
 
         Button bottom = new Button();
         InputStream bottomStream = new FileInputStream("images/bottom_arrow.png");
@@ -116,7 +110,7 @@ public class BubbleGui extends Application{
         bottomView.setPreserveRatio(true);
         bottom.setGraphic(bottomView);
         arrows.add(bottom, 1, 2);
-        bottom.setOnAction(new ArrowButtonChanger(game, "down"));
+        bottom.setOnAction(new ArrowButtonChanger(this, game, "down"));
 
         game.registerObserver(this);
         game.startGame();
@@ -126,9 +120,12 @@ public class BubbleGui extends Application{
         stage.setScene(scene);
         stage.show();
     }
-
+    
     public ImageView[][] getImages(){
         return images;
+    }
+    public Label getStatusLabel() {
+        return statusLabel;
     }
 
     public static void main(String[] args){

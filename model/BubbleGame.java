@@ -14,6 +14,7 @@ public class BubbleGame {
     private BubbleObserver observer;
 
     private Bubble[][] grid;    //locations not occupied by a bubble
+    private GameStatus gameStatus;    //state of the game "win" "loss" "playable"
 
     /**
      * New instance of the bubble game
@@ -21,8 +22,13 @@ public class BubbleGame {
     public BubbleGame(){
         this.grid = new Bubble[rows][cols];
         this.rand = new Random();
+        this.gameStatus = GameStatus.PLAYABLE;
     }
 
+    /**
+     * Spawns a new bubble on an open space on the board
+     * will have a twosize of 2 or 4
+     */
     private void spawnBubble(){
         //get random twosize
         int twosize = rand.nextInt(1, 3); //1 or 2
@@ -46,70 +52,197 @@ public class BubbleGame {
     }
 
     /**
-     * Moves the bubbles on the board
-     * @param direction "up", "down", "left" or "right"
+     * Slides bubbles to the edge
+     * @param direction direction of slide
+     * @param validMove boolean of if any change has happened
+     * @return validMove
      */
-     public void makeMove(String direction){
-        for (int row = 0; row < rows; row++) {  //go thhrough each spot on grid
-            for (int col = 0; col < cols; col++) {
-                int neighborCol = 0;
-                int neighborRow = 0;
-                int moveRow = 0;
-                int moveCol = 0;
+    private boolean slideBubbles(String direction, boolean validMove){
+        int moveRow = 0;
+        int moveCol = 0;
 
+        for (int a = 0; a < rows; a++) {  //go through each spot on grid
+            for (int b = 0; b < cols; b++) {
+                int row = b;
+                int col = a;
+                
                 if (direction == "right"){
-                    row = (rows - 1) - row;     //right to left
-                    neighborCol = col - 1;
-                    neighborRow = row;
-                    moveRow = row;
-                    moveCol = col + 1;
+                    col = (cols - 1) - a;
+
+                    moveCol = 1;
                 }
                 else if (direction == "left"){
-                    neighborCol = col + 1;
-                    neighborRow = row;
-                    moveRow = row;
-                    moveCol = col - 1;
+                    moveCol = -1;
                 }
-                else if (direction == "down"){
-                    col = (cols - 1) - col;     //bottom to top
-                    neighborCol = col;
-                    neighborRow = row - 1;
-                    moveRow = row + 1;
-                    moveCol = col;
+                else if (direction == "up"){
+                    row = a;
+                    col = b;
+
+                    moveRow = -1;
                 }
                 else {
+                    row = (rows - 1) - a;
+                    col = b;
+
+                    moveRow = 1;
+                }
+
+                //move
+                while (row + moveRow >= 0 && col + moveCol >= 0 && row + moveRow < rows && col + moveCol < cols 
+                        && grid[row + moveRow][col + moveCol] == null && grid[row][col] != null){
+                    grid[row + moveRow][col + moveCol] = grid[row][col];
+                    observer.bubbleUpdated(row + moveRow, col + moveCol, grid[row + moveRow][col + moveCol]);
+
+                    grid[row][col] = null;
+                    observer.bubbleUpdated(row, col, null);
+
+                    row += moveRow;
+                    col += moveCol;
+
+                    validMove = true;
+                }
+            }
+        }
+        return validMove;
+    }
+
+    /**
+     * Merges bubbles between sliding
+     * @param direction direction of slide
+     * @param validMove boolean of if any change has happened
+     * @return validMove
+     */
+    private boolean mergeBubbles(String direction, boolean validMove){
+        int neighborCol = 0;
+        int neighborRow = 0;
+
+        for (int a = 0; a < rows; a++) {  //go through each spot on grid
+            for (int b = 0; b < cols; b++) {
+                
+                int row = b;
+                int col = a;
+                if (direction == "right"){
+                    col = (cols - 1) - a;
+
+                    neighborCol = col + 1;
+                    neighborRow = row;
+                }
+                else if (direction == "left"){
+                    neighborCol = col - 1;
+                    neighborRow = row;
+                }
+                else if (direction == "up"){
+                    row = a;
+                    col = b;
+
+                    neighborCol = col;
+                    neighborRow = row - 1;
+                }
+                else {
+                    row = (rows - 1) - a;
+                    col = b;
+
                     neighborCol = col;
                     neighborRow = row + 1;
-                    moveRow = row - 1;
-                    moveCol = col;
                 }
 
                 //merging
-                if(neighborRow >= 0 && neighborCol >= 0 && neighborRow < rows 
-                        && neighborCol < cols){
-                    if (grid[neighborRow][neighborCol] != null){
+                if(neighborRow >= 0 && neighborCol >= 0 && neighborRow < rows && neighborCol < cols){
+                    if (grid[neighborRow][neighborCol] != null && grid[row][col] != null){
                         if (grid[neighborRow][neighborCol].getTwosize() == grid[row][col].getTwosize()){
-                            grid[row][col].merge();
-                            observer.bubbleUpdated(row, col, grid[row][col]);
+                            grid[neighborRow][neighborCol].merge();
+                            observer.bubbleUpdated(neighborRow, neighborCol, grid[neighborRow][neighborCol]);
 
-                            grid[neighborRow][neighborCol] = null;
-                            observer.bubbleUpdated(neighborRow, neighborCol, null);
+                            grid[row][col] = null;
+                            observer.bubbleUpdated(row, col, null);
+
+                            validMove = true;
                         }
-                    }
-                }
-                //moving
-                if (moveRow >= 0 && moveCol >= 0 && moveRow < rows && moveCol < cols){
-                    if (grid[moveRow][moveCol] == null){
-                        grid[moveRow][moveCol] = grid[row][col];
-                        observer.bubbleUpdated(moveRow, moveCol, grid[moveRow][moveCol]);
-
-                        grid[row][col] = null;
-                        observer.bubbleUpdated(row, col, null);
                     }
                 }
             }
         }
-        spawnBubble();  //new bubble added after player makes move
+        return validMove;
+    }
+
+    /**
+     * Moves the bubbles on the board
+     * @param direction "up", "down", "left" or "right"
+     */
+    public void makeMove(String direction){
+        boolean validMove = false;
+
+        validMove = slideBubbles(direction, validMove);
+        validMove = mergeBubbles(direction, validMove);
+        validMove = slideBubbles(direction, validMove);
+
+        if (validMove){
+            spawnBubble();  //new bubble added after player makes move
+        }
+        updateGameStatus();
+    }
+
+    /**
+     * Updates gameStatus
+     * "win" "loss" "playable"
+     */
+    private void updateGameStatus(){
+        int bubbleCount = 0;
+        for (int r = 0; r < rows; r++) {
+            for (int c = 0; c < cols; c++) {
+                if (grid[r][c] != null){
+                    bubbleCount++;
+
+                    if (grid[r][c].getTwosize() == 2048){
+                        gameStatus = GameStatus.WIN;
+                        return;
+                    }
+                }
+            }
+        }
+
+        if (bubbleCount != rows*cols){
+            gameStatus = GameStatus.PLAYABLE;
+            return;
+        }
+        else{
+            for (int r = 0; r < rows; r++) {
+                for (int c = 0; c < cols; c++) {
+                    int currentTwosize = grid[r][c].getTwosize();
+                    int targetTwosize = 0;
+
+                    if ((r - 1) >= 0){
+                        targetTwosize = grid[r - 1][c].getTwosize();
+                        if (targetTwosize == currentTwosize){
+                            gameStatus = GameStatus.PLAYABLE;
+                            return;
+                        }
+                    }
+                    else if ((c - 1) >= 0){
+                        targetTwosize = grid[r][c - 1].getTwosize();
+                        if (targetTwosize == currentTwosize){
+                            gameStatus = GameStatus.PLAYABLE;
+                            return;
+                        }
+                    }
+                    else if ((c + 1) < cols){
+                        targetTwosize = grid[r][c + 1].getTwosize();
+                        if (targetTwosize == currentTwosize){
+                            gameStatus = GameStatus.PLAYABLE;
+                            return;
+                        }
+                    }
+                    else if ((r + 1) < rows){
+                        targetTwosize = grid[r + 1][c].getTwosize();
+                        if (targetTwosize == currentTwosize){
+                            gameStatus = GameStatus.PLAYABLE;
+                            return;
+                        }
+                    }
+                }
+            }
+        }
+        gameStatus = GameStatus.LOSS;
     }
 
     public void startGame(){
@@ -122,8 +255,11 @@ public class BubbleGame {
     public int getRows() {
         return rows;
     }
+    public GameStatus getGameStatus() {
+        return gameStatus;
+    }
 
     public void registerObserver(BubbleGui gui){
-        observer = new BubbleChanger(this, gui);
+        observer = new BubbleChanger(gui.getImages());
     }
 }
