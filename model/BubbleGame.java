@@ -126,14 +126,14 @@ public class BubbleGame {
         if (validMove){
             spawnBubble();  //new bubble added after player makes move
         }
-        gameStatus = gameStatus();
+        updateGameStatus();
     }
 
     /**
      * Checks game status
      * @return "win", "loss" and "playable"
      */
-    private String gameStatus(){
+    private void updateGameStatus(){
         int bubbleCount = 0;
         for (int r = 0; r < rows; r++) {
             for (int c = 0; c < cols; c++) {
@@ -141,14 +141,16 @@ public class BubbleGame {
                     bubbleCount++;
 
                     if (grid[r][c].getTwosize() == 2048){
-                        return "win";
+                        gameStatus = "win";
+                        return;
                     }
                 }
             }
         }
 
         if (bubbleCount != rows*cols){
-            return "playable";
+            gameStatus = "playable";
+            return;
         }
         else{
             for (int r = 0; r < rows; r++) {
@@ -159,55 +161,64 @@ public class BubbleGame {
                     if ((r - 1) >= 0 && (c - 1) >= 0){
                         targetTwosize = grid[r - 1][c - 1].getTwosize();
                         if (targetTwosize == currentTwosize){
-                            return "playable";
+                            gameStatus = "playable";
+                            return;
                         }
                     }
                     else if ((r - 1) >= 0){
                         targetTwosize = grid[r - 1][c].getTwosize();
                         if (targetTwosize == currentTwosize){
-                            return "playable";
+                            gameStatus = "playable";
+                            return;
                         }
                     }
                     else if ((r - 1) >= 0 && (c + 1) < cols){
                         targetTwosize = grid[r - 1][c + 1].getTwosize();
                         if (targetTwosize == currentTwosize){
-                            return "playable";
+                            gameStatus = "playable";
+                            return;
                         }
                     }
                     else if ((c - 1) >= 0){
                         targetTwosize = grid[r][c - 1].getTwosize();
                         if (targetTwosize == currentTwosize){
-                            return "playable";
+                            gameStatus = "playable";
+                            return;
                         }
                     }
                     else if ((c + 1) < cols){
                         targetTwosize = grid[r][c + 1].getTwosize();
                         if (targetTwosize == currentTwosize){
-                            return "playable";
+                            gameStatus = "playable";
+                            return;
                         }
                     }
                     else if ((r + 1) < rows && (c - 1) >= 0){
                         targetTwosize = grid[r + 1][c - 1].getTwosize();
                         if (targetTwosize == currentTwosize){
-                            return "playable";
+                            gameStatus = "playable";
+                            return;
                         }
                     }
                     else if ((r + 1) < rows){
                         targetTwosize = grid[r + 1][c].getTwosize();
                         if (targetTwosize == currentTwosize){
-                            return "playable";
+                            gameStatus = "playable";
+                            return;
                         }
                     }
                     else if ((r + 1) < rows && (c + 1) < cols){
                         targetTwosize = grid[r + 1][c + 1].getTwosize();
                         if (targetTwosize == currentTwosize){
-                            return "playable";
+                            gameStatus = "playable";
+                            return;
                         }
                     }
                 }
             }
         }
-        return "loss";
+        gameStatus = "loss";
+        return;
     }
 
     public void startGame(){
