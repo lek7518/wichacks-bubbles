@@ -52,7 +52,7 @@ public class BubbleGui extends Application{
         leftView.setFitWidth(100);
         leftView.setPreserveRatio(true);
         left.setGraphic(leftView);
-        arrows.add(left, 1, 0);
+        arrows.add(left, 0, 1);
 
         Button right = new Button();
         InputStream rightStream = new FileInputStream("images/right_arrow.png");
@@ -62,7 +62,7 @@ public class BubbleGui extends Application{
         rightView.setFitWidth(100);
         rightView.setPreserveRatio(true);
         right.setGraphic(rightView);
-        arrows.add(right, 1, 2);
+        arrows.add(right, 2, 1);
 
         Button top = new Button();
         InputStream topStream = new FileInputStream("images/top_arrow.png");
@@ -72,7 +72,7 @@ public class BubbleGui extends Application{
         topView.setFitWidth(100);
         topView.setPreserveRatio(true);
         top.setGraphic(topView);
-        arrows.add(top, 0, 1);
+        arrows.add(top, 1, 0);
 
         Button bottom = new Button();
         InputStream bottomStream = new FileInputStream("images/bottom_arrow.png");
@@ -82,7 +82,7 @@ public class BubbleGui extends Application{
         bottomView.setFitWidth(100);
         bottomView.setPreserveRatio(true);
         bottom.setGraphic(bottomView);
-        arrows.add(bottom, 2, 1);
+        arrows.add(bottom, 1, 2);
 
 
         Scene scene = new Scene(borderPane);
