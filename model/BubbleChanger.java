@@ -1,10 +1,13 @@
+import javafx.scene.image.ImageView;
+
 /**
  * Observes a bubble
  * @author Carey McCollester
  */
 public class BubbleChanger implements BubbleObserver{
-    private BubbleGame game;    //Bubble game
-    private BubbleGui gui;      //GUI of the bubble game
+    private BubbleGame game;        //Bubble game
+    private BubbleGui gui;          //GUI of the bubble game
+    private ImageView images[][];   //images in their respective grid position
 
     /**
      * Creates new BubbleChanger for observing the bubbles
@@ -14,6 +17,8 @@ public class BubbleChanger implements BubbleObserver{
     public BubbleChanger(BubbleGame game, BubbleGui gui){
         this.game = game;
         this.gui = gui;
+
+        this.images = new ImageView[game.getRows()][game.getCols()];
     }
 
     @Override

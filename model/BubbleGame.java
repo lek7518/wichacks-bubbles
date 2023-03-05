@@ -39,6 +39,7 @@ public class BubbleGame {
         //make bubble
         Bubble bubble = new Bubble(twosize);
         grid[row][col] = bubble;
+        observer.bubbleUpdated(row, col, bubble);
     }
 
     /**
@@ -105,6 +106,13 @@ public class BubbleGame {
                 }
             }
         }
+    }
+
+    public int getCols() {
+        return cols;
+    }
+    public int getRows() {
+        return rows;
     }
 
     public void registerObserver(BubbleGui gui){
