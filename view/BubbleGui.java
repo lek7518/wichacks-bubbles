@@ -14,10 +14,12 @@ import java.io.FileInputStream;
 import java.io.InputStream;
 
 public class BubbleGui extends Application{
+    private BubbleGame game;
+
     private String status;
     private Label statusLabel = new Label(status);
     private ImageView[][] images;
-    private BubbleGame game;
+   
 
     public void init(){
         status = "Hit the arrow keys to play!";
@@ -116,6 +118,9 @@ public class BubbleGui extends Application{
 
     public ImageView[][] getImages(){
         return images;
+    }
+    public Label getStatusLabel() {
+        return statusLabel;
     }
 
     public static void main(String[] args){
