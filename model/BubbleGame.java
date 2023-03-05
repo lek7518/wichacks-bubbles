@@ -51,6 +51,8 @@ public class BubbleGame {
      * @param direction "up", "down", "left" or "right"
      */
      public void makeMove(String direction){
+        boolean validMove = false;
+
         for (int a = 0; a < rows; a++) {  //go through each spot on grid
             for (int b = 0; b < cols; b++) {
                 int neighborCol = 0;
@@ -94,8 +96,7 @@ public class BubbleGame {
                 }
 
                 //merging
-                if(neighborRow >= 0 && neighborCol >= 0 && neighborRow < rows 
-                        && neighborCol < cols){
+                if(neighborRow >= 0 && neighborCol >= 0 && neighborRow < rows && neighborCol < cols){
                     if (grid[neighborRow][neighborCol] != null && grid[row][col] != null){
                         if (grid[neighborRow][neighborCol].getTwosize() == grid[row][col].getTwosize()){
                             grid[row][col].merge();
@@ -103,6 +104,8 @@ public class BubbleGame {
 
                             grid[neighborRow][neighborCol] = null;
                             observer.bubbleUpdated(neighborRow, neighborCol, null);
+
+                            validMove = true;
                         }
                     }
                 }
@@ -114,11 +117,15 @@ public class BubbleGame {
 
                         grid[row][col] = null;
                         observer.bubbleUpdated(row, col, null);
+
+                        validMove = true;
                     }
                 }
             }
         }
-        spawnBubble();  //new bubble added after player makes move
+        if (validMove){
+            spawnBubble();  //new bubble added after player makes move
+        }
         gameStatus = gameStatus();
     }
 
