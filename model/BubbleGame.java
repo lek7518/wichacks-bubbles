@@ -62,7 +62,7 @@ public class BubbleGame {
 
                 int row = b;
                 int col = a;
-                if (direction == "down"){
+                if (direction == "right"){
                     col = (cols - 1) - a;
 
                     neighborCol = col + 1;
@@ -70,13 +70,13 @@ public class BubbleGame {
                     moveRow = row;
                     moveCol = col + 1;
                 }
-                else if (direction == "up"){
+                else if (direction == "left"){
                     neighborCol = col - 1;
                     neighborRow = row;
                     moveRow = row;
                     moveCol = col - 1;
                 }
-                else if (direction == "left"){
+                else if (direction == "up"){
                     row = a;
                     col = b;
 
@@ -130,8 +130,7 @@ public class BubbleGame {
     }
 
     /**
-     * Checks game status
-     * @return "win", "loss" and "playable"
+     * Updates gameStatus
      */
     private void updateGameStatus(){
         int bubbleCount = 0;
