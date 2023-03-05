@@ -16,6 +16,7 @@ import java.io.InputStream;
 public class BubbleGui extends Application{
     private String status;
     private Label statusLabel = new Label(status);
+    private ImageView[][] images;
 
     public void init(){
         status = "Hit the arrow keys to play!";
@@ -29,6 +30,13 @@ public class BubbleGui extends Application{
         this.init();
         BorderPane borderPane = new BorderPane();
         borderPane.setTop(statusLabel);
+
+        images = new ImageView[4][4];
+        for (int i = 0; i < images.length; i++) {
+            for (int index = 0; index < images.length; index++) {
+                images[i][index] = new ImageView();
+            }
+        }
 
         //background grid image
         InputStream gridStream = new FileInputStream("images/bub_grid.png"); //add image path
@@ -49,7 +57,12 @@ public class BubbleGui extends Application{
         testView.setX(-300);
         testView.setY(300);
 
-        Group bubbleGroup = new Group(gridView, testView);
+        Group bubbleGroup = new Group(gridView);
+        for (int i = 0; i < images.length; i++) {
+            for (int j = 0; j < images.length; j++) {
+                bubbleGroup.getChildren().add(images[i][j]);
+            }
+        }
         borderPane.setCenter(bubbleGroup);
 
         //arrow buttons
@@ -101,6 +114,10 @@ public class BubbleGui extends Application{
         stage.setTitle("Bubble Game");
         stage.setScene(scene);
         stage.show();
+    }
+
+    public ImageView[][] getImages(){
+        return images;
     }
 
     public static void main(String[] args){

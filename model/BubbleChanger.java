@@ -23,12 +23,7 @@ public class BubbleChanger implements BubbleObserver{
         this.game = game;
         this.gui = gui;
 
-        this.images = new ImageView[game.getRows()][game.getCols()];
-        for (int i = 0; i < images.length; i++) {
-            for (int index = 0; index < images.length; index++) {
-                images[i][index] = new ImageView();
-            }
-        }
+        this.images = gui.getImages();
     }
 
     @Override
