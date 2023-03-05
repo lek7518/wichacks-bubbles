@@ -1,6 +1,9 @@
+/**
+ * Represents a bubble
+ * @author Caarey McCollester
+ */
 public class Bubble {
-    //twosize - bubble size 2 (2^1-11)
-    private int twosize;
+    private int twosize;    //twosize - bubble size 2 (2^1-11)
     
     /**
      * Creates new Bubble
