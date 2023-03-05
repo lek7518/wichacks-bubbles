@@ -60,9 +60,7 @@ public class BubbleGame {
 
                 int row = b;
                 int col = a;
-
-                //a = row b = col
-                if (direction == "right"){
+                if (direction == "down"){
                     col = (cols - 1) - a;
 
                     neighborCol = col + 1;
@@ -70,14 +68,13 @@ public class BubbleGame {
                     moveRow = row;
                     moveCol = col + 1;
                 }
-                else if (direction == "left"){
+                else if (direction == "up"){
                     neighborCol = col - 1;
                     neighborRow = row;
                     moveRow = row;
                     moveCol = col - 1;
                 }
-                //b = row a = col
-                else if (direction == "down"){
+                else if (direction == "left"){
                     row = a;
                     col = b;
 
