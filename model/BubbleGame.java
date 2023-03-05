@@ -1,5 +1,9 @@
 import java.util.Random;
 
+/**
+ * Game of merging bubbles
+ * @author Carey McCollester
+ */
 public class BubbleGame {
 
     private final static int rows = 4;  //number of rows
