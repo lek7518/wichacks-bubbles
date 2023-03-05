@@ -8,6 +8,7 @@ import javafx.scene.image.ImageView;
 /**
  * Observes a bubble
  * @author Carey McCollester
+ * @author Lydia Klecan
  */
 public class BubbleChanger implements BubbleObserver{
     private BubbleGame game;        //Bubble game

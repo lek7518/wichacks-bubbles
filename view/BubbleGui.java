@@ -12,7 +12,11 @@ import javafx.stage.Stage;
 
 import java.io.FileInputStream;
 import java.io.InputStream;
-
+/**
+    * Graphical User Interface for Bubble Game
+    * @author Carey McCollester
+    * @author Lydia Klecan
+ */
 public class BubbleGui extends Application{
     private String status;
     private Label statusLabel = new Label(status);

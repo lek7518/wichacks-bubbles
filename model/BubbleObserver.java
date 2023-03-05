@@ -1,6 +1,7 @@
 /**
  * Observer interface for BubbleGame
  * @author Carey McCollester
+ * @author Lydia Klecan
  */
 public interface BubbleObserver {
     /**

@@ -3,6 +3,7 @@ import java.util.Random;
 /**
  * Game of merging bubbles
  * @author Carey McCollester
+ * @author Lydia Klecan
  */
 public class BubbleGame {
 

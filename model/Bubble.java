@@ -1,6 +1,7 @@
 /**
  * Represents a bubble
- * @author Caarey McCollester
+ * @author Carey McCollester
+ * @author Lydia Klecan
  */
 public class Bubble {
     private int twosize;    //twosize - bubble size 2 (2^1-11)

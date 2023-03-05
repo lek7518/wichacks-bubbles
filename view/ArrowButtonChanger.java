@@ -4,6 +4,7 @@ import javafx.event.EventHandler;
 /**
  * Handles the arrow buttons being pushed
  * @author Carey McCollester
+ * @author Lydia Klecan
  */
 public class ArrowButtonChanger implements EventHandler<ActionEvent>{
     private final BubbleGame game;
