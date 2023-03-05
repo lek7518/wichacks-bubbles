@@ -17,8 +17,60 @@ public class BubbleChanger implements BubbleObserver{
     }
 
     @Override
-    public void bubbleUpdated(int row, int col) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'bubbleUpdated'");
+    public void bubbleUpdated(int row, int col, Bubble bubble) {
+        int twosize = 0;
+        if (bubble != null){
+            twosize = bubble.getTwosize();
+        }
+
+        switch (twosize) {
+            case 2:
+                
+                break;
+
+            case 4:
+                
+                break;
+
+            case 8:
+                
+                break;
+
+            case 16:
+                
+                break;
+            
+            case 32:
+                
+                break;
+
+            case 64:
+
+                break;
+
+            case 128:
+
+                break;
+
+            case 256:
+
+                break;
+
+            case 512:
+
+                break;
+
+            case 1024:
+
+                break;
+
+            case 2048:
+
+                break;
+        
+            default:    //null 0 no bubble
+                
+                break;
+        }
     }
 }
