@@ -13,6 +13,7 @@ public class BubbleGame {
     private BubbleObserver observer;
 
     private Bubble[][] grid;    //locations not occupied by a bubble
+    private String gameStatus;    //state of the game "win" "loss" "playable"
 
     /**
      * New instance of the bubble game
@@ -20,6 +21,7 @@ public class BubbleGame {
     public BubbleGame(){
         this.grid = new Bubble[rows][cols];
         this.rand = new Random();
+        this.gameStatus = "playable";
     }
 
     private void spawnBubble(){
@@ -109,6 +111,7 @@ public class BubbleGame {
             }
         }
         spawnBubble();  //new bubble added after player makes move
+        gameStatus = gameStatus();
     }
 
     /**
@@ -201,6 +204,9 @@ public class BubbleGame {
     }
     public int getRows() {
         return rows;
+    }
+    public String getGameStatus() {
+        return gameStatus;
     }
 
     public void registerObserver(BubbleGui gui){
