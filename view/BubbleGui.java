@@ -115,7 +115,7 @@ public class BubbleGui extends Application{
         stage.setScene(scene);
         stage.show();
     }
-
+    
     public ImageView[][] getImages(){
         return images;
     }
