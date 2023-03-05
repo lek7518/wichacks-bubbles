@@ -17,7 +17,7 @@ public class BubbleChanger implements BubbleObserver{
     }
 
     @Override
-    public void bubbleUpdated(int row, int col) {
+    public void bubbleUpdated(int row, int col, Bubble bubble) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'bubbleUpdated'");
     }

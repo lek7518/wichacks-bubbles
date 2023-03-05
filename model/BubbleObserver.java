@@ -8,5 +8,5 @@ public interface BubbleObserver {
      * @param row position in rows
      * @param col position in columns
      */
-    public void bubbleUpdated(int row, int col);
+    public void bubbleUpdated(int row, int col, Bubble bubble);
 }

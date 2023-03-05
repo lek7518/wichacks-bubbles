@@ -86,7 +86,10 @@ public class BubbleGame {
                     if (grid[neighborRow][neighborCol] != null){
                         if (grid[neighborRow][neighborCol].getTwosize() == grid[row][col].getTwosize()){
                             grid[row][col].merge();
+                            observer.bubbleUpdated(row, col, grid[row][col]);
+
                             grid[neighborRow][neighborCol] = null;
+                            observer.bubbleUpdated(neighborRow, neighborCol, null);
                         }
                     }
                 }
@@ -94,7 +97,10 @@ public class BubbleGame {
                 if (moveRow >= 0 && moveCol >= 0 && moveRow < rows && moveCol < cols){
                     if (grid[moveRow][moveCol] == null){
                         grid[moveRow][moveCol] = grid[row][col];
+                        observer.bubbleUpdated(moveRow, moveCol, grid[moveRow][moveCol]);
+
                         grid[row][col] = null;
+                        observer.bubbleUpdated(row, col, null);
                     }
                 }
             }
