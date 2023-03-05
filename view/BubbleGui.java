@@ -38,7 +38,18 @@ public class BubbleGui extends Application{
         gridView.setY(0);
         gridView.setFitWidth(800);
         gridView.setPreserveRatio(true);
-        borderPane.setCenter(gridView);
+        //borderPane.setCenter(gridView);
+
+        //testing position setting functions
+        InputStream testStream = new FileInputStream("images/bub_grey.png");
+        Image testBubble = new Image(testStream);
+        ImageView testView = new ImageView();
+        testView.setImage(testBubble);
+        testView.setX(-300);
+        testView.setY(300);
+
+        Group bubbleGroup = new Group(testView, gridView);
+        borderPane.setCenter(bubbleGroup);
 
         //arrow buttons
         GridPane arrows = new GridPane();
@@ -83,14 +94,6 @@ public class BubbleGui extends Application{
         bottomView.setPreserveRatio(true);
         bottom.setGraphic(bottomView);
         arrows.add(bottom, 1, 2);
-
-        //testing position setting functions
-        InputStream testStream = new FileInputStream("images/bub_grey.png");
-        Image testBubble = new Image(testStream);
-        ImageView testView = new ImageView();
-        testView.setImage(testBubble);
-        testView.setX(-300);
-        testView.setY(300);
 
 
         Scene scene = new Scene(borderPane);
