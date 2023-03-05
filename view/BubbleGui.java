@@ -32,7 +32,7 @@ public class BubbleGui extends Application{
         BorderPane borderPane = new BorderPane();
         borderPane.setTop(statusLabel);
 
-        images = new ImageView[4][4];
+        images = new ImageView[game.getRows()][game.getCols()];
         for (int i = 0; i < images.length; i++) {
             for (int index = 0; index < images.length; index++) {
                 images[i][index] = new ImageView();
