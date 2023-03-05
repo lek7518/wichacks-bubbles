@@ -111,6 +111,32 @@ public class BubbleGame {
         spawnBubble();  //new bubble added after player makes move
     }
 
+    private String gameStatus(){
+        int bubbleCount = 0;
+        for (int r = 0; r < rows; r++) {
+            for (int c = 0; c < cols; c++) {
+                if (grid[r][c] != null){
+                    bubbleCount++;
+
+                    if (grid[r][c].getTwosize() == 2048){
+                        return "win";
+                    }
+                }
+            }
+        }
+
+        if (bubbleCount != rows*cols){
+            return "playable";
+        }
+        else{
+            for (int r = 0; r < rows; r++) {
+                for (int c = 0; c < cols; c++) {
+                    //check if mergable
+                }
+            }
+        }
+    }
+
     public void startGame(){
         spawnBubble();
     }
