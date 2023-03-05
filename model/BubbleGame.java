@@ -51,49 +51,58 @@ public class BubbleGame {
      * @param direction "up", "down", "left" or "right"
      */
      public void makeMove(String direction){
-        for (int a = 0; a < rows; a++) {  //go thhrough each spot on grid
+        for (int a = 0; a < rows; a++) {  //go through each spot on grid
             for (int b = 0; b < cols; b++) {
                 int neighborCol = 0;
                 int neighborRow = 0;
                 int moveRow = 0;
                 int moveCol = 0;
 
+                int row = b;
+                int col = a;
+
                 //a = row b = col
                 if (direction == "right"){
-                    a = (rows - 1) - a;     //right to left
-                    neighborCol = b - 1;
-                    neighborRow = a;
-                    moveRow = a;
-                    moveCol = b + 1;
+                    col = (cols - 1) - a;
+
+                    neighborCol = col + 1;
+                    neighborRow = row;
+                    moveRow = row;
+                    moveCol = col + 1;
                 }
                 else if (direction == "left"){
-                    neighborCol = b + 1;
-                    neighborRow = a;
-                    moveRow = a;
-                    moveCol = b - 1;
+                    neighborCol = col - 1;
+                    neighborRow = row;
+                    moveRow = row;
+                    moveCol = col - 1;
                 }
                 //b = row a = col
                 else if (direction == "down"){
-                    a = (cols - 1) - a;     //bottom to top
-                    neighborCol = a;
-                    neighborRow = b - 1;
-                    moveRow = b + 1;
-                    moveCol = a;
+                    row = a;
+                    col = b;
+
+                    neighborCol = col;
+                    neighborRow = row + 1;
+                    moveRow = row - 1;
+                    moveCol = col;
                 }
                 else {
-                    neighborCol = a;
-                    neighborRow = b + 1;
-                    moveRow = b - 1;
-                    moveCol = a;
+                    row = (rows - 1) - a;
+                    col = b;
+
+                    neighborCol = col;
+                    neighborRow = row - 1;
+                    moveRow = row + 1;
+                    moveCol = col;
                 }
 
                 //merging
                 if(neighborRow >= 0 && neighborCol >= 0 && neighborRow < rows 
                         && neighborCol < cols){
-                    if (grid[neighborRow][neighborCol] != null && grid[a][b] != null){
-                        if (grid[neighborRow][neighborCol].getTwosize() == grid[a][b].getTwosize()){
-                            grid[a][b].merge();
-                            observer.bubbleUpdated(a, b, grid[a][b]);
+                    if (grid[neighborRow][neighborCol] != null && grid[row][col] != null){
+                        if (grid[neighborRow][neighborCol].getTwosize() == grid[row][col].getTwosize()){
+                            grid[row][col].merge();
+                            observer.bubbleUpdated(row, col, grid[row][col]);
 
                             grid[neighborRow][neighborCol] = null;
                             observer.bubbleUpdated(neighborRow, neighborCol, null);
@@ -101,13 +110,13 @@ public class BubbleGame {
                     }
                 }
                 //moving
-                if (moveRow >= 0 && moveCol >= 0 && moveRow < rows && moveCol < cols && grid[a][b] != null){
+                if (moveRow >= 0 && moveCol >= 0 && moveRow < rows && moveCol < cols && grid[row][col] != null){
                     if (grid[moveRow][moveCol] == null){
-                        grid[moveRow][moveCol] = grid[a][b];
+                        grid[moveRow][moveCol] = grid[row][col];
                         observer.bubbleUpdated(moveRow, moveCol, grid[moveRow][moveCol]);
 
-                        grid[a][b] = null;
-                        observer.bubbleUpdated(a, b, null);
+                        grid[row][col] = null;
+                        observer.bubbleUpdated(row, col, null);
                     }
                 }
             }
