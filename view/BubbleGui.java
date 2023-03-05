@@ -14,10 +14,12 @@ import java.io.FileInputStream;
 import java.io.InputStream;
 
 public class BubbleGui extends Application{
+    private BubbleGame game;
+
     private String status;
     private Label statusLabel = new Label(status);
     private ImageView[][] images;
-    private BubbleGame game;
+   
 
     public void init(){
         status = "Hit the arrow keys to play!";
@@ -32,7 +34,7 @@ public class BubbleGui extends Application{
         BorderPane borderPane = new BorderPane();
         borderPane.setTop(statusLabel);
 
-        images = new ImageView[4][4];
+        images = new ImageView[game.getRows()][game.getCols()];
         for (int i = 0; i < images.length; i++) {
             for (int index = 0; index < images.length; index++) {
                 images[i][index] = new ImageView();
@@ -48,15 +50,6 @@ public class BubbleGui extends Application{
         gridView.setY(0);
         gridView.setFitWidth(800);
         gridView.setPreserveRatio(true);
-        //borderPane.setCenter(gridView);
-
-        //testing position setting functions
-        InputStream testStream = new FileInputStream("images/bub_grey.png");
-        Image testBubble = new Image(testStream);
-        ImageView testView = new ImageView();
-        testView.setImage(testBubble);
-        testView.setX(-300);
-        testView.setY(300);
 
         Group bubbleGroup = new Group(gridView);
         for (int i = 0; i < images.length; i++) {
@@ -125,6 +118,9 @@ public class BubbleGui extends Application{
 
     public ImageView[][] getImages(){
         return images;
+    }
+    public Label getStatusLabel() {
+        return statusLabel;
     }
 
     public static void main(String[] args){
