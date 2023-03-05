@@ -135,25 +135,25 @@ public class BubbleGame {
                     col = b;
 
                     neighborCol = col;
-                    neighborRow = row + 1;
+                    neighborRow = row - 1;
                 }
                 else {
                     row = (rows - 1) - a;
                     col = b;
 
                     neighborCol = col;
-                    neighborRow = row - 1;
+                    neighborRow = row + 1;
                 }
 
                 //merging
                 if(neighborRow >= 0 && neighborCol >= 0 && neighborRow < rows && neighborCol < cols){
                     if (grid[neighborRow][neighborCol] != null && grid[row][col] != null){
                         if (grid[neighborRow][neighborCol].getTwosize() == grid[row][col].getTwosize()){
-                            grid[row][col].merge();
-                            observer.bubbleUpdated(row, col, grid[row][col]);
+                            grid[neighborRow][neighborCol].merge();
+                            observer.bubbleUpdated(neighborRow, neighborCol, grid[neighborRow][neighborCol]);
 
-                            grid[neighborRow][neighborCol] = null;
-                            observer.bubbleUpdated(neighborRow, neighborCol, null);
+                            grid[row][col] = null;
+                            observer.bubbleUpdated(row, col, null);
 
                             validMove = true;
                         }
