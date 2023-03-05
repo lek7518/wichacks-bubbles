@@ -94,8 +94,8 @@ public class BubbleChanger implements BubbleObserver{
 
             Image bubbleImage = new Image(new FileInputStream(imagePath));
             images[row][col].setImage(bubbleImage);
-            images[row][col].setX(100 + (col * 200));
-            images[row][col].setY(100 + (row * 200));
+            images[row][col].setX(100 + (col * 200) - (bubbleSize/2));
+            images[row][col].setY(100 + (row * 200) - (bubbleSize/2));
             images[row][col].setFitWidth(bubbleSize);
             images[row][col].setPreserveRatio(true);
         }
