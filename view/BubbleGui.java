@@ -1,3 +1,4 @@
+import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -48,7 +49,7 @@ public class BubbleGui extends Application{
         testView.setX(-300);
         testView.setY(300);
 
-        Group bubbleGroup = new Group(testView, gridView);
+        Group bubbleGroup = new Group(gridView, testView);
         borderPane.setCenter(bubbleGroup);
 
         //arrow buttons
