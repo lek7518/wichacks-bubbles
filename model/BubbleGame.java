@@ -24,6 +24,10 @@ public class BubbleGame {
         this.gameStatus = "playable";
     }
 
+    /**
+     * Spawns a new bubble on an open space on the board
+     * will have a twosize of 2 or 4
+     */
     private void spawnBubble(){
         //get random twosize
         int twosize = rand.nextInt(1, 3); //1 or 2
@@ -47,19 +51,72 @@ public class BubbleGame {
     }
 
     /**
-     * Moves the bubbles on the board
-     * @param direction "up", "down", "left" or "right"
+     * Slides bubbles to the edge
+     * @param direction direction of slide
+     * @param validMove boolean of if any change has happened
+     * @return validMove
      */
-     public void makeMove(String direction){
-        boolean validMove = false;
+    private boolean slideBubbles(String direction, boolean validMove){
+        int moveRow = 0;
+        int moveCol = 0;
 
         for (int a = 0; a < rows; a++) {  //go through each spot on grid
             for (int b = 0; b < cols; b++) {
-                int neighborCol = 0;
-                int neighborRow = 0;
-                int moveRow = 0;
-                int moveCol = 0;
+                int row = b;
+                int col = a;
+                
+                if (direction == "right"){
+                    col = (cols - 1) - a;
 
+                    moveCol = 1;
+                }
+                else if (direction == "left"){
+                    moveCol = -1;
+                }
+                else if (direction == "up"){
+                    row = a;
+                    col = b;
+
+                    moveRow = -1;
+                }
+                else {
+                    row = (rows - 1) - a;
+                    col = b;
+
+                    moveRow = 1;
+                }
+
+                //move
+                while (row + moveRow >= 0 && col + moveCol >= 0 && row + moveRow < rows && col + moveCol < cols && grid[row + moveRow][col + moveCol] == null){
+                    grid[row + moveRow][col + moveCol] = grid[row][col];
+                    observer.bubbleUpdated(row + moveRow, col + moveCol, grid[row + moveRow][col + moveCol]);
+
+                    grid[row][col] = null;
+                    observer.bubbleUpdated(row, col, null);
+
+                    row += moveRow;
+                    col += moveCol;
+
+                    validMove = true;
+                }
+            }
+        }
+        return validMove;
+    }
+
+    /**
+     * Merges bubbles between sliding
+     * @param direction direction of slide
+     * @param validMove boolean of if any change has happened
+     * @return validMove
+     */
+    private boolean mergeBubbles(String direction, boolean validMove){
+        int neighborCol = 0;
+        int neighborRow = 0;
+
+        for (int a = 0; a < rows; a++) {  //go through each spot on grid
+            for (int b = 0; b < cols; b++) {
+                
                 int row = b;
                 int col = a;
                 if (direction == "right"){
@@ -67,14 +124,10 @@ public class BubbleGame {
 
                     neighborCol = col + 1;
                     neighborRow = row;
-                    moveRow = row;
-                    moveCol = col + 1;
                 }
                 else if (direction == "left"){
                     neighborCol = col - 1;
                     neighborRow = row;
-                    moveRow = row;
-                    moveCol = col - 1;
                 }
                 else if (direction == "up"){
                     row = a;
@@ -82,8 +135,6 @@ public class BubbleGame {
 
                     neighborCol = col;
                     neighborRow = row + 1;
-                    moveRow = row - 1;
-                    moveCol = col;
                 }
                 else {
                     row = (rows - 1) - a;
@@ -91,8 +142,6 @@ public class BubbleGame {
 
                     neighborCol = col;
                     neighborRow = row - 1;
-                    moveRow = row + 1;
-                    moveCol = col;
                 }
 
                 //merging
@@ -109,20 +158,22 @@ public class BubbleGame {
                         }
                     }
                 }
-                //moving
-                if (moveRow >= 0 && moveCol >= 0 && moveRow < rows && moveCol < cols && grid[row][col] != null){
-                    if (grid[moveRow][moveCol] == null){
-                        grid[moveRow][moveCol] = grid[row][col];
-                        observer.bubbleUpdated(moveRow, moveCol, grid[moveRow][moveCol]);
-
-                        grid[row][col] = null;
-                        observer.bubbleUpdated(row, col, null);
-
-                        validMove = true;
-                    }
-                }
             }
         }
+        return validMove;
+    }
+    
+    /**
+     * Moves the bubbles on the board
+     * @param direction "up", "down", "left" or "right"
+     */
+    public void makeMove(String direction){
+        boolean validMove = false;
+
+        validMove = slideBubbles(direction, validMove);
+        validMove = mergeBubbles(direction, validMove);
+        validMove = slideBubbles(direction, validMove);
+
         if (validMove){
             spawnBubble();  //new bubble added after player makes move
         }
