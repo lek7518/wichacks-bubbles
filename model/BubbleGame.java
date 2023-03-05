@@ -100,4 +100,8 @@ public class BubbleGame {
             }
         }
     }
+
+    public void registerObserver(BubbleGui gui){
+        observer = new BubbleChanger(this, gui);
+    }
 }
