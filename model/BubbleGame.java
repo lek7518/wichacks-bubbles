@@ -111,6 +111,10 @@ public class BubbleGame {
         spawnBubble();  //new bubble added after player makes move
     }
 
+    /**
+     * Checks game status
+     * @return "win", "loss" and "playable"
+     */
     private String gameStatus(){
         int bubbleCount = 0;
         for (int r = 0; r < rows; r++) {
@@ -131,10 +135,61 @@ public class BubbleGame {
         else{
             for (int r = 0; r < rows; r++) {
                 for (int c = 0; c < cols; c++) {
-                    //check if mergable
+                    int currentTwosize = grid[r][c].getTwosize();
+                    int targetTwosize = 0;
+
+                    if ((r - 1) >= 0 && (c - 1) >= 0){
+                        targetTwosize = grid[r - 1][c - 1].getTwosize();
+                        if (targetTwosize == currentTwosize){
+                            return "playable";
+                        }
+                    }
+                    else if ((r - 1) >= 0){
+                        targetTwosize = grid[r - 1][c].getTwosize();
+                        if (targetTwosize == currentTwosize){
+                            return "playable";
+                        }
+                    }
+                    else if ((r - 1) >= 0 && (c + 1) < cols){
+                        targetTwosize = grid[r - 1][c + 1].getTwosize();
+                        if (targetTwosize == currentTwosize){
+                            return "playable";
+                        }
+                    }
+                    else if ((c - 1) >= 0){
+                        targetTwosize = grid[r][c - 1].getTwosize();
+                        if (targetTwosize == currentTwosize){
+                            return "playable";
+                        }
+                    }
+                    else if ((c + 1) < cols){
+                        targetTwosize = grid[r][c + 1].getTwosize();
+                        if (targetTwosize == currentTwosize){
+                            return "playable";
+                        }
+                    }
+                    else if ((r + 1) < rows && (c - 1) >= 0){
+                        targetTwosize = grid[r + 1][c - 1].getTwosize();
+                        if (targetTwosize == currentTwosize){
+                            return "playable";
+                        }
+                    }
+                    else if ((r + 1) < rows){
+                        targetTwosize = grid[r + 1][c].getTwosize();
+                        if (targetTwosize == currentTwosize){
+                            return "playable";
+                        }
+                    }
+                    else if ((r + 1) < rows && (c + 1) < cols){
+                        targetTwosize = grid[r + 1][c + 1].getTwosize();
+                        if (targetTwosize == currentTwosize){
+                            return "playable";
+                        }
+                    }
                 }
             }
         }
+        return "loss";
     }
 
     public void startGame(){
