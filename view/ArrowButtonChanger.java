@@ -6,10 +6,12 @@ import javafx.event.EventHandler;
  * @author Carey McCollester
  */
 public class ArrowButtonChanger implements EventHandler<ActionEvent>{
+    private final BubbleGui gui;
     private final BubbleGame game;
     private final String direction;
 
-    public ArrowButtonChanger(BubbleGame game, String direction){
+    public ArrowButtonChanger(BubbleGui gui, BubbleGame game, String direction){
+        this.gui = gui;
         this.game = game;
         this.direction = direction;
     }
@@ -17,5 +19,6 @@ public class ArrowButtonChanger implements EventHandler<ActionEvent>{
     @Override
     public void handle(ActionEvent arg0) {
         game.makeMove(direction);
+        gui.getStatusLabel().setText(game.getGameStatus());
     }
 }

@@ -109,7 +109,5 @@ public class BubbleChanger implements BubbleObserver{
         catch (FileNotFoundException e){
             System.err.println("Image is not found.");
         }
-
-        gui.getStatusLabel().setText(game.getGameStatus());
     }
 }

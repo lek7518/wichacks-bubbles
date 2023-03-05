@@ -1,5 +1,7 @@
 import java.util.Random;
 
+import javax.lang.model.util.ElementScanner14;
+
 /**
  * Game of merging bubbles
  * @author Carey McCollester
@@ -87,7 +89,8 @@ public class BubbleGame {
                 }
 
                 //move
-                while (row + moveRow >= 0 && col + moveCol >= 0 && row + moveRow < rows && col + moveCol < cols && grid[row + moveRow][col + moveCol] == null){
+                while (row + moveRow >= 0 && col + moveCol >= 0 && row + moveRow < rows && col + moveCol < cols 
+                        && grid[row + moveRow][col + moveCol] == null && grid[row][col] != null){
                     grid[row + moveRow][col + moveCol] = grid[row][col];
                     observer.bubbleUpdated(row + moveRow, col + moveCol, grid[row + moveRow][col + moveCol]);
 
@@ -162,7 +165,7 @@ public class BubbleGame {
         }
         return validMove;
     }
-    
+
     /**
      * Moves the bubbles on the board
      * @param direction "up", "down", "left" or "right"
@@ -182,6 +185,7 @@ public class BubbleGame {
 
     /**
      * Updates gameStatus
+     * "win" "loss" "playable"
      */
     private void updateGameStatus(){
         int bubbleCount = 0;

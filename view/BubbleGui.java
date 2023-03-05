@@ -72,7 +72,7 @@ public class BubbleGui extends Application{
         leftView.setPreserveRatio(true);
         left.setGraphic(leftView);
         arrows.add(left, 0, 1);
-        left.setOnAction(new ArrowButtonChanger(game, "left"));
+        left.setOnAction(new ArrowButtonChanger(this, game, "left"));
 
         Button right = new Button();
         InputStream rightStream = new FileInputStream("images/right_arrow.png");
@@ -83,7 +83,7 @@ public class BubbleGui extends Application{
         rightView.setPreserveRatio(true);
         right.setGraphic(rightView);
         arrows.add(right, 2, 1);
-        right.setOnAction(new ArrowButtonChanger(game, "right"));
+        right.setOnAction(new ArrowButtonChanger(this, game, "right"));
 
         Button top = new Button();
         InputStream topStream = new FileInputStream("images/top_arrow.png");
@@ -94,7 +94,7 @@ public class BubbleGui extends Application{
         topView.setPreserveRatio(true);
         top.setGraphic(topView);
         arrows.add(top, 1, 0);
-        top.setOnAction(new ArrowButtonChanger(game, "up"));
+        top.setOnAction(new ArrowButtonChanger(this, game, "up"));
 
         Button bottom = new Button();
         InputStream bottomStream = new FileInputStream("images/bottom_arrow.png");
@@ -105,7 +105,7 @@ public class BubbleGui extends Application{
         bottomView.setPreserveRatio(true);
         bottom.setGraphic(bottomView);
         arrows.add(bottom, 1, 2);
-        bottom.setOnAction(new ArrowButtonChanger(game, "down"));
+        bottom.setOnAction(new ArrowButtonChanger(this, game, "down"));
 
         game.registerObserver(this);
         game.startGame();
