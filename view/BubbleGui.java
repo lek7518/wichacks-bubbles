@@ -6,7 +6,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
-
+import javafx.scene.text.Font;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -24,6 +24,7 @@ public class BubbleGui extends Application{
     public void init(){
         status = "Hit the arrow keys to play!";
         statusLabel.setText(status);
+        statusLabel.setFont(new Font("Times", 30));
 
         game = new BubbleGame();
     }
