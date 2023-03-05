@@ -106,10 +106,9 @@ public class BubbleGame {
                         observer.bubbleUpdated(row, col, null);
                     }
                 }
-
-                spawnBubble();
             }
         }
+        spawnBubble();  //new bubble added after player makes move
     }
 
     public void startGame(){
