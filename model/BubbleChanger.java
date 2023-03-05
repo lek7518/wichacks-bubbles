@@ -93,7 +93,8 @@ public class BubbleChanger implements BubbleObserver{
 
             Image bubbleImage = new Image(imageStream);
             images[row][col].setImage(bubbleImage);
-            //set position
+            images[row][col].setX(-300 + (row * 200));
+            images[row][col].setY(300 - (col * 200));
         }
         catch (FileNotFoundException e){
             System.err.println("Image is not found.");

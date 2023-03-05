@@ -84,6 +84,14 @@ public class BubbleGui extends Application{
         bottom.setGraphic(bottomView);
         arrows.add(bottom, 1, 2);
 
+        //testing position setting functions
+        InputStream testStream = new FileInputStream("images/bub_grey.png");
+        Image testBubble = new Image(testStream);
+        ImageView testView = new ImageView();
+        testView.setImage(testBubble);
+        testView.setX(-300);
+        testView.setY(300);
+
 
         Scene scene = new Scene(borderPane);
         stage.setTitle("Bubble Game");
