@@ -9,16 +9,26 @@ public class ArrowButtonChanger implements EventHandler<ActionEvent>{
     private final BubbleGui gui;
     private final BubbleGame game;
     private final String direction;
+    private boolean active;
 
     public ArrowButtonChanger(BubbleGui gui, BubbleGame game, String direction){
         this.gui = gui;
         this.game = game;
         this.direction = direction;
+        this.active = true;
     }
 
     @Override
     public void handle(ActionEvent arg0) {
-        game.makeMove(direction);
-        gui.getStatusLabel().setText(game.getGameStatus());
+        if (active){
+            game.makeMove(direction);
+
+            String gameStatus = game.getGameStatus();
+            gui.getStatusLabel().setText(gameStatus);
+
+            if (gameStatus != "playable"){
+                active = false;
+            }
+        }
     }
 }
