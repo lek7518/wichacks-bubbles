@@ -13,7 +13,7 @@ public class BubbleGame {
     private BubbleObserver observer;
 
     private Bubble[][] grid;    //locations not occupied by a bubble
-    private String gameStatus;    //state of the game "win" "loss" "playable"
+    private GameStatus gameStatus;    //state of the game "win" "loss" "playable"
 
     /**
      * New instance of the bubble game
@@ -21,7 +21,7 @@ public class BubbleGame {
     public BubbleGame(){
         this.grid = new Bubble[rows][cols];
         this.rand = new Random();
-        this.gameStatus = "playable";
+        this.gameStatus = GameStatus.PLAYABLE;
     }
 
     /**
@@ -193,7 +193,7 @@ public class BubbleGame {
                     bubbleCount++;
 
                     if (grid[r][c].getTwosize() == 2048){
-                        gameStatus = "win";
+                        gameStatus = GameStatus.WIN;
                         return;
                     }
                 }
@@ -201,7 +201,7 @@ public class BubbleGame {
         }
 
         if (bubbleCount != rows*cols){
-            gameStatus = "playable";
+            gameStatus = GameStatus.PLAYABLE;
             return;
         }
         else{
@@ -213,35 +213,35 @@ public class BubbleGame {
                     if ((r - 1) >= 0){
                         targetTwosize = grid[r - 1][c].getTwosize();
                         if (targetTwosize == currentTwosize){
-                            gameStatus = "playable";
+                            gameStatus = GameStatus.PLAYABLE;
                             return;
                         }
                     }
                     else if ((c - 1) >= 0){
                         targetTwosize = grid[r][c - 1].getTwosize();
                         if (targetTwosize == currentTwosize){
-                            gameStatus = "playable";
+                            gameStatus = GameStatus.PLAYABLE;
                             return;
                         }
                     }
                     else if ((c + 1) < cols){
                         targetTwosize = grid[r][c + 1].getTwosize();
                         if (targetTwosize == currentTwosize){
-                            gameStatus = "playable";
+                            gameStatus = GameStatus.PLAYABLE;
                             return;
                         }
                     }
                     else if ((r + 1) < rows){
                         targetTwosize = grid[r + 1][c].getTwosize();
                         if (targetTwosize == currentTwosize){
-                            gameStatus = "playable";
+                            gameStatus = GameStatus.PLAYABLE;
                             return;
                         }
                     }
                 }
             }
         }
-        gameStatus = "loss";
+        gameStatus = GameStatus.LOSS;
     }
 
     public void startGame(){
@@ -254,7 +254,7 @@ public class BubbleGame {
     public int getRows() {
         return rows;
     }
-    public String getGameStatus() {
+    public GameStatus getGameStatus() {
         return gameStatus;
     }
 

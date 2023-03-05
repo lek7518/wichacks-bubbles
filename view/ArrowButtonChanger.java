@@ -23,10 +23,10 @@ public class ArrowButtonChanger implements EventHandler<ActionEvent>{
         if (active){
             game.makeMove(direction);
 
-            String gameStatus = game.getGameStatus();
-            gui.getStatusLabel().setText(gameStatus);
+            GameStatus gameStatus = game.getGameStatus();
+            gui.getStatusLabel().setText(gameStatus.toString());
 
-            if (gameStatus != "playable"){
+            if (gameStatus != GameStatus.PLAYABLE){
                 active = false;
             }
         }
